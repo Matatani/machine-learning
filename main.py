@@ -1,13 +1,17 @@
-from fastapi import FastAPI
+import grpc
+import predictor_pb2_grpc
+import predictor_pb2
 
-app = FastAPI()
+def main():
+    channel = grpc.insecure_channel('localhost:50051')
+    stub = predictor_pb2_grpc.PredictorStub(channel)
 
+    greeting = predictor_pb2.Greeting(greeting='Hello, world!', name='World')
+    request = predictor_pb2.HelloRequest(greeting=greeting)
+    setattr(request, "from", "Python Server")
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+    response = stub.Hello(request)
+    print("Go server responded:", response.greeting)
 
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+if __name__ == "__main__":
+    main()

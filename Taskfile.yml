@@ -1,0 +1,11 @@
+version: "3"
+
+tasks:
+  generate_proto:
+    desc: Generate gRPC Python code using container's Python
+    cmds:
+      - docker exec backend-env python -m grpc_tools.protoc 
+          -I /app/matatani-proto 
+          --python_out=/app/matatani-ml 
+          --grpc_python_out=/app/matatani-ml 
+          /app/matatani-proto/predictor.proto
