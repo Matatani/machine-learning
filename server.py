@@ -18,3 +18,5 @@ class PredictorServicer(predictor_pb2_grpc.PredictorServicer):
     def Hello(self, request, context):
         return predictor_pb2.HelloResponse(greeting=f"Hello, {request.greeting.name}!")
 
+    def PredictImage(self, request, context):
+        return predictor_pb2.PredictImageResponse(className=f"Disease: Bacterial Blight")

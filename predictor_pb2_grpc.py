@@ -39,12 +39,23 @@ class PredictorStub(object):
                 request_serializer=predictor__pb2.HelloRequest.SerializeToString,
                 response_deserializer=predictor__pb2.HelloResponse.FromString,
                 _registered_method=True)
+        self.PredictImage = channel.unary_unary(
+                '/Predictor/PredictImage',
+                request_serializer=predictor__pb2.PredictImageRequest.SerializeToString,
+                response_deserializer=predictor__pb2.PredictImageResponse.FromString,
+                _registered_method=True)
 
 
 class PredictorServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Hello(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PredictImage(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -57,6 +68,11 @@ def add_PredictorServicer_to_server(servicer, server):
                     servicer.Hello,
                     request_deserializer=predictor__pb2.HelloRequest.FromString,
                     response_serializer=predictor__pb2.HelloResponse.SerializeToString,
+            ),
+            'PredictImage': grpc.unary_unary_rpc_method_handler(
+                    servicer.PredictImage,
+                    request_deserializer=predictor__pb2.PredictImageRequest.FromString,
+                    response_serializer=predictor__pb2.PredictImageResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -86,6 +102,33 @@ class Predictor(object):
             '/Predictor/Hello',
             predictor__pb2.HelloRequest.SerializeToString,
             predictor__pb2.HelloResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def PredictImage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/Predictor/PredictImage',
+            predictor__pb2.PredictImageRequest.SerializeToString,
+            predictor__pb2.PredictImageResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -24,20 +24,24 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fpredictor.proto\"*\n\x08Greeting\x12\x10\n\x08greeting\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"9\n\x0cHelloRequest\x12\x1b\n\x08greeting\x18\x01 \x01(\x0b\x32\t.Greeting\x12\x0c\n\x04\x66rom\x18\x02 \x01(\t\"!\n\rHelloResponse\x12\x10\n\x08greeting\x18\x01 \x01(\t23\n\tPredictor\x12&\n\x05Hello\x12\r.HelloRequest\x1a\x0e.HelloResponseB-Z+www.github.com/Maevlava/Matatani/Backend/mlb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fpredictor.proto\"*\n\x08Greeting\x12\x10\n\x08greeting\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"9\n\x0cHelloRequest\x12\x1b\n\x08greeting\x18\x01 \x01(\x0b\x32\t.Greeting\x12\x0c\n\x04\x66rom\x18\x02 \x01(\t\"!\n\rHelloResponse\x12\x10\n\x08greeting\x18\x01 \x01(\t\"2\n\x13PredictImageRequest\x12\x0e\n\x06\x62ucket\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\")\n\x14PredictImageResponse\x12\x11\n\tclassName\x18\x01 \x01(\t2p\n\tPredictor\x12&\n\x05Hello\x12\r.HelloRequest\x1a\x0e.HelloResponse\x12;\n\x0cPredictImage\x12\x14.PredictImageRequest\x1a\x15.PredictImageResponseB+Z)www.github.com/Maevlava/Matatani/Backend/b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'predictor_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'Z+www.github.com/Maevlava/Matatani/Backend/ml'
+  _globals['DESCRIPTOR']._serialized_options = b'Z)www.github.com/Maevlava/Matatani/Backend/'
   _globals['_GREETING']._serialized_start=19
   _globals['_GREETING']._serialized_end=61
   _globals['_HELLOREQUEST']._serialized_start=63
   _globals['_HELLOREQUEST']._serialized_end=120
   _globals['_HELLORESPONSE']._serialized_start=122
   _globals['_HELLORESPONSE']._serialized_end=155
-  _globals['_PREDICTOR']._serialized_start=157
-  _globals['_PREDICTOR']._serialized_end=208
+  _globals['_PREDICTIMAGEREQUEST']._serialized_start=157
+  _globals['_PREDICTIMAGEREQUEST']._serialized_end=207
+  _globals['_PREDICTIMAGERESPONSE']._serialized_start=209
+  _globals['_PREDICTIMAGERESPONSE']._serialized_end=250
+  _globals['_PREDICTOR']._serialized_start=252
+  _globals['_PREDICTOR']._serialized_end=364
 # @@protoc_insertion_point(module_scope)
