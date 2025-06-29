@@ -1,2 +1,16 @@
+scikit-learn
+pandas
+pandas-stubs
+scipy
+numpy
+matplotlib
+seaborn
+plotly
+openpyxl
+opencv-python-headless
+opencv-python
+
 grpcio
 grpcio-tools
+boto3
+joblib
