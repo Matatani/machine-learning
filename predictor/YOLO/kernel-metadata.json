@@ -1,0 +1,19 @@
+{
+  "id": "mevlava/yolo-paddy",
+  "id_no": 88808231,
+  "title": "yolo_paddy",
+  "code_file": "yolo-paddy.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [
+    "mevlava/diseased-leaves"
+  ],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": []
+}
