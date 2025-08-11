@@ -35,22 +35,43 @@ class PredictorServicer(predictor_pb2_grpc.PredictorServicer):
 
     def PredictImage(self, request, context):
         print("PredictImage called with request:", request)
-        local_path = f'/tmp/{request.key}'
-        try:
-            self.s3.download_file(request.bucket, request.key, local_path)
-            print("Download successful:", local_path)
-        except Exception as e:
-            print("Error downloading from S3:", e)
-            context.set_details(str(e))
-            context.set_code(grpc.StatusCode.INTERNAL)
-            return predictor_pb2.PredictImageResponse(className="Error")
+
+        base_filename = os.path.basename(request.key)
+        temp_original_path = f'./original_{base_filename}.png'
+        temp_predicted_path = f'./predicted_{base_filename}.png'
+
+        output_key = f'predicted/{base_filename}'
+
+        self.__download_file__(request.bucket, request.key, temp_original_path)
 
         try:
-            predicted_label = self.predictor.predict_image(local_path)
-            print("Prediction successful:", predicted_label)
-            return predictor_pb2.PredictImageResponse(className=f'The disease is {predicted_label}')
+            self.predictor.predict_image(image_path=temp_original_path, output_path=temp_predicted_path)
+            self.__upload_file__(request.bucket, output_key, temp_predicted_path)
+            print("Prediction successful:")
+            return predictor_pb2.PredictImageResponse(className=output_key)
+
         except Exception as e:
             print("Error during prediction:", e)
-            context.set_details(str(e))
-            context.set_code(grpc.StatusCode.INTERNAL)
             return predictor_pb2.PredictImageResponse(className="Error")
+
+        finally:
+            os.remove(temp_original_path)
+            os.remove(temp_predicted_path)
+
+    def __download_file__(self, bucket, key, path):
+        try:
+            print(f"Downloading s3://{bucket}/{key} to {path}")
+            self.s3.download_file(bucket, key, path)
+            print("Download successful.")
+        except Exception as e:
+            print(f"Error downloading from S3: {e}")
+    def __upload_file__(self, bucket, key, path):
+        try:
+            self.s3.upload_file(
+                path,
+                bucket,
+                key,
+                ExtraArgs={'ContentType': 'image/png'}
+            )
+        except Exception as e:
+            print(f"Error uploading to S3: {e}")

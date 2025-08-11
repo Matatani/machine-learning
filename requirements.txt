@@ -9,6 +9,7 @@ plotly
 openpyxl
 opencv-python-headless
 opencv-python
+ultralytics
 
 grpcio
 grpcio-tools
